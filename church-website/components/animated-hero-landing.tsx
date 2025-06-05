@@ -3,16 +3,22 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
+import { useIsMobile } from "@/hooks/use-is-mobile"
 
 export default function AnimatedHeroLanding() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
+  const isMobile = useIsMobile()
 
   // Enhanced parallax transforms with more dramatic zoom-out effect
   const imageY = useTransform(scrollY, [0, 1000], [0, 300])
   const imageScale = useTransform(scrollY, [0, 1000], [1.0, 0.8])
   const textY = useTransform(scrollY, [0, 800], [0, 200])
   const overlayOpacity = useTransform(scrollY, [0, 500], [0.2, 0.5])
+
+  const heroImage = isMobile
+    ? "/images/aurastoswalds.jpg"
+    : "/images/church-building.jpg"
 
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-gradient-to-b from-amber-50 to-white">
@@ -28,10 +34,10 @@ export default function AnimatedHeroLanding() {
         transition={{ duration: 8, ease: "easeOut" }}
       >
         <Image
-          src="/images/church-building.jpg"
+          src={heroImage}
           alt="St. Simon's Church"
           fill
-          className="object-cover object-center"
+          className="object-cover object-top sm:object-center"
           priority
           quality={100}
         />

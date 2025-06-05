@@ -13,17 +13,13 @@ export default function AnimatedHeroLanding() {
   const isMobile = useIsMobile()
 
   // Enhanced parallax transforms with more dramatic zoom-out effect
-  const imageY = useTransform(
-    scrollY,
-    [0, 1000],
-    [0, isMobile ? 0 : 300] // No parallax on mobile, full on desktop
-  )
+  const imageY = useTransform(scrollY, [0, 1000], [0, 300])
   const imageScale = useTransform(scrollY, [0, 1000], [1.0, 0.8])
   const textY = useTransform(scrollY, [0, 800], [0, 200])
   const overlayOpacity = useTransform(scrollY, [0, 500], [0.2, 0.5])
 
   const heroImage = isMobile
-    ? "/images/aurastoswalds.jpg"
+    ? "/images/building-phone.jpg"
     : "/images/church-building.jpg"
 
   if (!mounted) return null // or a loading skeleton
@@ -31,35 +27,35 @@ export default function AnimatedHeroLanding() {
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-gradient-to-b from-amber-50 to-white">
       {/* Background Image with Enhanced Zoom-out Effect */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        style={{
-          y: imageY,
-          scale: imageScale,
-        }}
-        initial={{ scale: 1.2}}
-        animate={{ scale: 1 }}
-        transition={{ duration: 5, ease: "easeOut" }}
-      >
-        <Image
-          src={heroImage}
-          alt="St. Simon's Church"
-          fill
-          className="object-cover object-top sm:object-center"
-          priority
-          quality={100}
-        />
+    <motion.div
+      className="absolute top-0 left-0 w-screen h-screen z-0"
+      style={{
+        y: imageY,
+        scale: imageScale,
+      }}
+      initial={isMobile ? false : { scale: 1.2 }}
+      animate={isMobile ? false : { scale: 1 }}
+      transition={{ duration: 4, ease: "easeOut" }}
+    >
+      <Image
+        src={heroImage}
+        alt="St. Simon's Church"
+        fill
+        className="object-cover object-center"
+        priority
+        quality={100}
+      />
 
-        {/* Enhanced Gradient Overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"
-          style={{ opacity: overlayOpacity }}
-        />
-      </motion.div>
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"
+        style={{ opacity: overlayOpacity }}
+      />
+    </motion.div>
+
 
      
       {/* Main Content Container */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col h-screen">
         {/* Left Side Text Section */}
         <div className="flex-1 flex items-start pt-8 md:pt-12 lg:pt-16">
 

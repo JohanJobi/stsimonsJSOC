@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ChevronRight, MapPin, Phone, Mail } from "lucide-react"
 
+
 import { Button } from "@/components/ui/button"
 import AnimatedHeroLanding from "@/components/animated-hero-landing"
 import PhotoGalleryPreview from "@/components/photo-gallery-preview"

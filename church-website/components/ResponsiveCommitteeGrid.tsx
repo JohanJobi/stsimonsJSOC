@@ -16,7 +16,7 @@ interface ResponsiveCommitteeGridProps {
 
 export default function ResponsiveCommitteeGrid({ members }: ResponsiveCommitteeGridProps) {
   const isDesktop = useIsDesktop(1024)
-  const gridClass = "grid min-w-0 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+  const gridClass = "grid min-w-0 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 justify-center"
 
   if (isDesktop) {
     // Desktop: staggered animation

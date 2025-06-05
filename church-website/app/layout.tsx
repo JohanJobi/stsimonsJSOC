@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import ScrollProgress from "@/components/scroll-progress"
 import ScrollToTop from "@/components/scroll-to-top"
 import { Analytics } from "@vercel/analytics/next"
+import { SessionProvider } from "next-auth/react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,15 +27,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <div className="flex min-h-screen flex-col">
-            <ScrollToTop />
-            <ScrollProgress />
-            <Navbar />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+            <div className="flex min-h-screen flex-col">
+              <ScrollToTop />
+              <ScrollProgress />
+              <Navbar />
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </SessionProvider>
         <Analytics />
       </body>
     </html>

@@ -39,6 +39,11 @@ const managingCommittee = [
     position: "Joint Secretary",
     image: "/images/jineshmathew.jpg",
   },
+  {
+    name: "Sibiraj C Mathew",
+    position: "Joint Trustee",
+    image: "/images/sibiraj.jpg",
+  },
       {
     name: "Jomon P Geroge",
     position: "Comitte Member",
@@ -54,6 +59,7 @@ const managingCommittee = [
     position: "Comitte Member  & Headmaster of Sunday School",
     image: "/images/lalu.jpg",
   },
+
 ]
 
 const VanithaSamajam = [

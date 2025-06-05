@@ -76,6 +76,7 @@ const { toast } = useToast()
   return (
     <>
       <AnimatedSection
+      once={false}
         animation="fadeInUp"
         className="mb-8 flex flex-col sm:flex-row justify-between items-center gap-4"
       >

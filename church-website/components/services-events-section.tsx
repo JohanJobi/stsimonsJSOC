@@ -45,7 +45,7 @@ export default function ServicesEventsSection() {
   return (
     <section className="bg-amber-50 py-12 md:py-24">
       <div className="container">
-        <AnimatedSection animation="fadeInUp" className="flex flex-col items-center justify-center text-center mb-12">
+        <AnimatedSection once={false} animation="fadeInUp" className="flex flex-col items-center justify-center text-center mb-12">
           <div className="inline-block rounded-lg bg-amber-100 px-3 py-1 text-sm text-amber-800 mb-4">Join Us</div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
             Services & Upcoming Events
@@ -57,7 +57,7 @@ export default function ServicesEventsSection() {
 
         <div className="grid gap-8 md:grid-cols-2 max-w-6xl mx-auto">
           {/* Service Times */}
-          <AnimatedSection animation="fadeInLeft" delay={0.1}>
+          <AnimatedSection once={false} animation="fadeInLeft" delay={0.1}>
             <div className="bg-white rounded-lg shadow-lg p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
@@ -85,7 +85,7 @@ export default function ServicesEventsSection() {
           </AnimatedSection>
 
           {/* Upcoming Events */}
-          <AnimatedSection animation="fadeInRight" delay={0.3}>
+          <AnimatedSection once={false} animation="fadeInRight" delay={0.3}>
             <div className="bg-white rounded-lg shadow-lg p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">

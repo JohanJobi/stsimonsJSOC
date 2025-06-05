@@ -13,11 +13,10 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <AnimatedHeroLanding />
-
       {/* Welcome Section */}
       <section className="container py-12 md:py-24">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-          <AnimatedSection animation="fadeInLeft" className="space-y-4">
+          <AnimatedSection animation="fadeInLeft" className="space-y-4" once={false}>
             <div className="inline-block rounded-lg bg-amber-100 px-3 py-1 text-sm text-amber-800">Our Mission</div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Building Faith, Community & Tradition
@@ -41,7 +40,7 @@ export default function Home() {
               </Link>
             </div>
           </AnimatedSection>
-          <AnimatedSection animation="fadeInRight" className="flex justify-center" delay={0.2}>
+          <AnimatedSection once={false} animation="fadeInRight" className="flex justify-center" delay={0.2}>
             <Image
               src="/placeholder.svg?height=400&width=600"
               alt="St. Simon's Church Interior"
@@ -59,7 +58,7 @@ export default function Home() {
 
       {/* Photo Gallery Preview */}
       <section className="container py-12 md:py-24">
-        <AnimatedSection animation="fadeInUp" className="flex flex-col items-center justify-center text-center mb-12">
+        <AnimatedSection once={false} animation="fadeInUp" className="flex flex-col items-center justify-center text-center mb-12">
           <div className="inline-block rounded-lg bg-amber-100 px-3 py-1 text-sm text-amber-800 mb-4">Gallery</div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Church Photo Gallery</h2>
           <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed max-w-[700px]">
@@ -69,7 +68,7 @@ export default function Home() {
 
         <PhotoGalleryPreview />
 
-        <AnimatedSection animation="fadeInUp" delay={0.3} className="flex justify-center mt-12">
+        <AnimatedSection once={false} animation="fadeInUp" delay={0.3} className="flex justify-center mt-12">
           <Link href="/gallery">
             <Button className="bg-amber-800 hover:bg-amber-900">
               View Full Gallery
@@ -83,7 +82,7 @@ export default function Home() {
       <section className="bg-amber-800 text-white py-12 md:py-24">
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-2">
-            <AnimatedSection animation="fadeInLeft" className="space-y-4">
+            <AnimatedSection once={false} animation="fadeInLeft" className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Contact Us</h2>
               <p className="text-amber-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 We&apos;d love to hear from you. Reach out to us with any questions or inquiries.
@@ -102,7 +101,7 @@ export default function Home() {
                   <p>stsimonsjsocgloucester@gmail.com</p>
                 </div>
               </StaggeredChildren>
-              <AnimatedSection animation="fadeInUp" delay={0.4} className="pt-4">
+              <AnimatedSection once={false} animation="fadeInUp" delay={0.4} className="pt-4">
                 <Link href="/contact">
                   <Button className="bg-white text-amber-800 hover:bg-amber-100">
                     Get in Touch
@@ -111,7 +110,7 @@ export default function Home() {
                 </Link>
               </AnimatedSection>
             </AnimatedSection>
-            <AnimatedSection animation="fadeInRight" delay={0.3} className="rounded-lg overflow-hidden">
+            <AnimatedSection once={false} animation="fadeInRight" delay={0.3} className="rounded-lg overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39431.444092889185!2d-2.2864916783203095!3d51.852461100000035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487105ea0b074b45%3A0x4e0cbcd90a296c3a!2sSt%20Oswald&#39;s%20Parish%20Church%20Coney%20Hill!5e0!3m2!1sen!2suk!4v1748963013012!5m2!1sen!2suk"
                 width="100%"

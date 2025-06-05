@@ -27,7 +27,7 @@ export default function StaggeredChildren({
   amount = 0.3,
   animation = "fadeInUp",
 }: StaggeredChildrenProps) {
-  const { ref, isInView } = useScrollAnimation({ once, amount })
+  const { ref, isInView } = useScrollAnimation({ once: true, amount: 0.3 })
 
   const getAnimationVariants = () => {
     switch (animation) {

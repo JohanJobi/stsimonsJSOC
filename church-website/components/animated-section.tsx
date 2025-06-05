@@ -25,7 +25,7 @@ export default function AnimatedSection({
   once = true,
   amount = 0.3,
 }: AnimatedSectionProps) {
-  const { ref, isInView } = useScrollAnimation({ once, amount })
+  const { ref, isInView } = useScrollAnimation({ once: true, amount: 0.3 })
 
   const getAnimationVariants = () => {
     switch (animation) {

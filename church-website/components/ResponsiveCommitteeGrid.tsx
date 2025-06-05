@@ -4,7 +4,17 @@ import AnimatedSection from "@/components/animated-section"
 import Image from "next/image"
 import StaggeredChildren from "@/components/staggered-children"
 
-export default function ResponsiveCommitteeGrid({ members }) {
+interface CommitteeMember {
+  name: string
+  position: string
+  image?: string
+}
+
+interface ResponsiveCommitteeGridProps {
+  members: CommitteeMember[]
+}
+
+export default function ResponsiveCommitteeGrid({ members }: ResponsiveCommitteeGridProps) {
   const isDesktop = useIsDesktop(1024)
   const gridClass = "grid min-w-0 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
 

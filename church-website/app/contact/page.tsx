@@ -1,4 +1,4 @@
-"use client"
+
 import type { Metadata } from "next"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import ContactForm from "@/components/contact-form"

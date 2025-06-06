@@ -2,104 +2,202 @@
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import ContactSubmissions from "./contact"
 
-interface Contact {
-  id: number
-  name: string
-  email: string
-  message: string
-  phone?: string
-  createdAt: string
-}
-
-export default function AdminPage() {
+export default function AdminDashboard() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [contacts, setContacts] = useState<Contact[]>([])
-  const [loading, setLoading] = useState(true)
-  const [copied, setCopied] = useState<{ [key: string]: boolean }>({})
+  const [view, setView] = useState<"contacts" | "upload">("contacts")
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/admin/login")
     }
-    if (status === "authenticated") {
-      setLoading(true)
-      fetch("/api/contact")
-        .then(res => res.json())
-        .then(data => {
-          setContacts(data)
-          setLoading(false)
-        })
-    }
   }, [status, router])
-
-  const handleCopy = (value: string, key: string) => {
-    navigator.clipboard.writeText(value)
-    setCopied(prev => ({ ...prev, [key]: true }))
-    setTimeout(() => setCopied(prev => ({ ...prev, [key]: false })), 1500)
-  }
 
   if (status === "loading") return <div>Loading...</div>
   if (!session) return null
 
   return (
     <div className="container py-12 pt-16">
-      <h1 className="text-3xl font-bold mb-6 pt-8">Contact Submissions</h1>
-      {loading ? (
-        <div>Loading...</div>
-      ) : contacts.length === 0 ? (
-        <div>No contacts found.</div>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border">
-            <thead>
-              <tr>
-                <th className="border px-4 py-2">Name</th>
-                <th className="border px-4 py-2">Email</th>
-                <th className="border px-4 py-2">Phone</th>
-                <th className="border px-4 py-2">Message</th>
-                <th className="border px-4 py-2">Date, Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {contacts.map(contact => (
-                <tr key={contact.id}>
-                  <td className="border px-4 py-2">{contact.name}</td>
-                  <td className="border px-4 py-2">
-                    <div className="flex items-center gap-2">
-                      {contact.email}
-                      <button
-                        className="text-xs px-2 py-1 bg-amber-100 rounded hover:bg-amber-200 border border-amber-300"
-                        onClick={() => handleCopy(contact.email, `email-${contact.id}`)}
-                        title="Copy email"
-                      >
-                        {copied[`email-${contact.id}`] ? "Copied!" : "Copy"}
-                      </button>
-                    </div>
-                  </td>
-                  <td className="border px-4 py-2">
-                    <div className="flex items-center gap-2">
-                      {contact.phone || "N/A"}
-                      {contact.phone && (
-                        <button
-                          className="text-xs px-2 py-1 bg-amber-100 rounded hover:bg-amber-200 border border-amber-300"
-                          onClick={() => handleCopy(contact.phone!, `phone-${contact.id}`)}
-                          title="Copy phone"
-                        >
-                          {copied[`phone-${contact.id}`] ? "Copied!" : "Copy"}
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                  <td className="border px-4 py-2">{contact.message}</td>
-                  <td className="border px-4 py-2">{new Date(contact.createdAt).toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {/* Add mt-8 here for more space below the navbar */}
+      <div className="flex gap-4 mb-8 mt-8">
+        <button
+          className={`px-4 py-2 rounded ${view === "contacts" ? "bg-amber-700 text-white" : "bg-gray-200"}`}
+          onClick={() => setView("contacts")}
+        >
+          Contact Submissions
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${view === "upload" ? "bg-amber-700 text-white" : "bg-gray-200"}`}
+          onClick={() => setView("upload")}
+        >
+          Upload Photos
+        </button>
+      </div>
+      {view === "contacts" ? <ContactSubmissions /> : <PhotoUploadScreen />}
     </div>
+  )
+}
+
+// --- PhotoUploadScreen component ---
+function PhotoUploadScreen() {
+  const [files, setFiles] = useState<File[]>([])
+  const [inputs, setInputs] = useState<{ name: string; category: string; event: string }[]>([])
+  const [uploading, setUploading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [eventTypes, setEventTypes] = useState<string[]>([])
+  const [newEventType, setNewEventType] = useState("")
+
+  // Fetch existing event types from images
+  useEffect(() => {
+    fetch("/api/images")
+      .then(res => res.json())
+      .then(images => {
+        const uniqueEvents = Array.from(new Set(images.filter((img: any) => img.category === "events").map((img: any) => img.event?.name).filter(Boolean)))
+        setEventTypes(uniqueEvents as string[])
+      })
+  }, [])
+
+  const categories = ["services", "events", "youth", "church"]
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || [])
+    setFiles(selectedFiles)
+    setInputs(selectedFiles.map(() => ({
+      name: "",
+      category: categories[0],
+      event: "",
+    })))
+  }
+
+  const handleInputChange = (idx: number, field: "name" | "category" | "event", value: string) => {
+    setInputs(inputs =>
+      inputs.map((input, i) => (i === idx ? { ...input, [field]: value } : input))
+    )
+  }
+
+  const handleAddEventType = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (newEventType && !eventTypes.includes(newEventType)) {
+      setEventTypes(prev => [...prev, newEventType])
+      setInputs(inputs => inputs.map(input =>
+        input.category === "events" ? { ...input, event: newEventType } : input
+      ))
+      setNewEventType("")
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setUploading(true)
+    for (let i = 0; i < files.length; i++) {
+      const formData = new FormData()
+      formData.append("file", files[i])
+
+      // 1. Upload to Cloudinary via your API
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+      const data = await res.json()
+      if (!data.url) continue
+
+      // 2. Save to your database
+      await fetch("/api/images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          src: data.url,
+          alt: inputs[i].name,
+          category: inputs[i].category,
+          event: inputs[i].category === "events" ? inputs[i].event : null,
+        }),
+      })
+    }
+    setUploading(false)
+    setSuccess(true)
+    setFiles([])
+    setInputs([])
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <h2 className="text-xl font-bold mb-4">Upload Photos</h2>
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        onChange={handleFileChange}
+        className="mb-4"
+      />
+
+      {/* Add Event Type (only for events) */}
+      <div className="mb-4">
+        <div className="flex gap-2 items-center">
+          <input
+            type="text"
+            placeholder="Add new event type (e.g. Christmas 2024)"
+            value={newEventType}
+            onChange={e => setNewEventType(e.target.value)}
+            className="border px-2 py-1"
+          />
+          <button
+            type="button"
+            className="bg-amber-700 text-white px-3 py-1 rounded"
+            disabled={!newEventType.trim()}
+            onClick={handleAddEventType}
+          >
+            Add Event
+          </button>
+        </div>
+      </div>
+
+      {files.map((file, idx) => (
+        <div key={idx} className="mb-4 border p-2 rounded">
+          <div className="mb-2 font-semibold">{file.name}</div>
+          <input
+            type="text"
+            placeholder="Image Name"
+            value={inputs[idx]?.name || ""}
+            onChange={e => handleInputChange(idx, "name", e.target.value)}
+            className="border px-2 py-1 mr-2"
+            required
+          />
+          <select
+            value={inputs[idx]?.category || categories[0]}
+            onChange={e => handleInputChange(idx, "category", e.target.value)}
+            className="border px-2 py-1 mr-2"
+            required
+          >
+            {categories.map(cat => (
+              <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+            ))}
+          </select>
+          {/* Show event dropdown only if category is events */}
+          {inputs[idx]?.category === "events" && (
+            <select
+              value={inputs[idx]?.event || ""}
+              onChange={e => handleInputChange(idx, "event", e.target.value)}
+              className="border px-2 py-1"
+              required
+            >
+              <option value="" disabled>Select event</option>
+              {eventTypes.map(event => (
+                <option key={event} value={event}>{event}</option>
+              ))}
+            </select>
+          )}
+        </div>
+      ))}
+      <button
+        type="submit"
+        className="bg-amber-700 text-white px-4 py-2 rounded"
+        disabled={uploading}
+      >
+        {uploading ? "Uploading..." : "Upload"}
+      </button>
+      {success && <div className="text-green-600">Images uploaded!</div>}
+    </form>
   )
 }

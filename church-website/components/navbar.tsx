@@ -58,16 +58,6 @@ export default function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={handleNavClick}>
           <Image
-            src="/images/e1.png" 
-            alt="St. Simon's Church Logo"
-            width={50}
-            height={50}
-            className={` ${
-              showChurchName ? "text-amber-800 opacity-100" : "text-white opacity-0"
-            }`}
-            priority
-          />
-          <Image
             src="/images/e2.png" 
             alt="St. Simon's Church Logo"
             width={50}
@@ -86,6 +76,16 @@ export default function Navbar() {
           >
             St. Simon&apos;s Church
           </motion.span>
+                    <Image
+            src="/images/e1.png" 
+            alt="St. Simon's Church Logo"
+            width={50}
+            height={50}
+            className={` ${
+              showChurchName ? "text-amber-800 opacity-100" : "text-white opacity-0"
+            }`}
+            priority
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">

@@ -44,7 +44,7 @@ export default function Home() {
           </AnimatedSection>
           <AnimatedSection once={false} animation="fadeInRight" className="flex justify-center" delay={0.2}>
             <Image
-              src="/placeholder.svg?height=400&width=600"
+              src="/images/interior.jpg"
               alt="St. Simon's Church Interior"
               width={600}
               height={400}

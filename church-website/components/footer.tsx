@@ -72,7 +72,7 @@ export default function Footer() {
                 <span className="block">Phone: +44 7949864424</span>
               </p>
               <p>
-                <span className="block">Email: stsimonsjsoc@gmail.com</span>
+                <span className="block">Email: stsimonsjsocgloucester@gmail.com</span>
               </p>
             </address>
           </div>

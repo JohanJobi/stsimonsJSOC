@@ -1,2 +1,0 @@
-[2025-06-04T19:47:33.963Z] {"name":"cxz","email":"czx@gn","phone":"zcx","subject":"czxzcx","message":"adsf"}
-[2025-06-04T21:51:21.440Z] {"name":"cxz","email":"czx@gn","phone":"zcx","subject":"czxzcx","message":"sfdafasd"}

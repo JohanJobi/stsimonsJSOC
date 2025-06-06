@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description:
     "St. Simon's Jacobite Syrian Orthodox Church in Gloucester - A place of worship, fellowship, and spiritual growth.",
   generator: "v0.dev",
+  icons: {
+    icon: "/images/e2.png",
+  },
 }
 
 export default function RootLayout({

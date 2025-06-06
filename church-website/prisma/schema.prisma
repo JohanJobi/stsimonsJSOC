@@ -19,7 +19,7 @@ model Contact {
 model Event {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  images    Image[]  @relation(onDelete: CASCADE)
+  images    Image[]  @relation(onDelete: Cascade)
   createdAt DateTime @default(now())
 }
 

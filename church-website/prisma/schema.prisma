@@ -19,7 +19,7 @@ model Contact {
 model Event {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  images    Image[]  @relation(onDelete: Cascade)
+  images    Image[]
   createdAt DateTime @default(now())
 }
 
@@ -29,7 +29,7 @@ model Image {
   alt       String
   category  String
   eventId   Int?
-  event     Event?   @relation(fields: [eventId], references: [id])
+  event     Event?   @relation(fields: [eventId], references: [id], onDelete: Cascade)
   section   String?
   createdAt DateTime @default(now())
 }

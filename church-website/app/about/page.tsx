@@ -71,7 +71,7 @@ const VanithaSamajam = [
     {
     name: "Soumya Jinesh",
     position: "Prayer Fellowship Coordinator",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/images/soumya.jpg",
   },
 ]
 
@@ -100,7 +100,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative h-[40vh] min-h-[300px] w-full overflow-hidden">
         <Image
-          src="/placeholder.svg?height=500&width=1200"
+          src="/images/bg4.jpg"
           alt="Church interior"
           fill
           className="object-cover"

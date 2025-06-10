@@ -97,9 +97,9 @@ export default function PhotoGallery() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredImages
               .filter(img => img.section === section)
-              .map((image, index) => (
+              .map(image => (
                 <div
-                  key={index}
+                  key={image.id}
                   className="relative overflow-hidden rounded-lg cursor-pointer group"
                   onClick={() => setSelectedImage(image)}
                 >

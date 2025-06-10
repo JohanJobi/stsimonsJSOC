@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       }).end(buffer)
     })
 
-    return NextResponse.json({ url: upload.secure_url })
+    return NextResponse.json({ url: upload.secure_url, publicId: upload.public_id })
   } catch (error) {
     return NextResponse.json({ error: "Upload failed" }, { status: 500 })
   }

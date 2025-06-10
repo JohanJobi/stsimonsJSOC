@@ -30,6 +30,6 @@ model Image {
   category  String
   eventId   Int?
   event     Event?   @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  section   String?
+  publicId  String?  // Cloudinary public ID, now optional
   createdAt DateTime @default(now())
 }

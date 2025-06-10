@@ -3,11 +3,12 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import ContactSubmissions from "./contact"
+import EventManager from "./event-manager"
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [view, setView] = useState<"contacts" | "upload">("contacts")
+  const [view, setView] = useState<"contacts" | "upload" | "events">("contacts")
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -34,8 +35,14 @@ export default function AdminDashboard() {
         >
           Upload Photos
         </button>
+        <button
+          className={`px-4 py-2 rounded ${view === "events" ? "bg-amber-700 text-white" : "bg-gray-200"}`}
+          onClick={() => setView("events")}
+        >
+          Manage Events & Photos
+        </button>
       </div>
-      {view === "contacts" ? <ContactSubmissions /> : <PhotoUploadScreen />}
+      {view === "contacts" ? <ContactSubmissions /> : view === "upload" ? <PhotoUploadScreen /> : <EventManager />}
     </div>
   )
 }

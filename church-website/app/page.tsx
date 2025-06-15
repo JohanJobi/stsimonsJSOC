@@ -15,6 +15,26 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <AnimatedHeroLanding />
+      
+
+{/* 
+      <section className="container py-12 md:py-20">
+        <AnimatedSection once={false} animation="fadeInUp" className="flex flex-col items-center text-center max-w-3xl mx-auto">
+          <div className="inline-block rounded-lg bg-amber-100 px-3 py-1 text-sm text-amber-800 mb-4">Vicar's Message</div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">A Message from Our Vicar</h2>
+          <p className="text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed max-w-2xl mb-2">
+            Beloved in Christ,<br />
+            <br />
+            INSERT MESSAGE HERE
+            <br /><br />
+            <br />
+            <span className="font-semibold text-amber-800">Fr. Anish Varghese</span>
+          </p>
+        </AnimatedSection>
+      </section> */}
+
+
+
       {/* Welcome Section */}
       <section className="container py-12 md:py-24">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
@@ -54,6 +74,8 @@ export default function Home() {
           </AnimatedSection>
         </div>
       </section>
+
+
 
       {/* Services & Events Section */}
       <ServicesEventsSection />

@@ -32,3 +32,16 @@ export async function GET() {
     return NextResponse.json({ message: "Failed to fetch contacts" }, { status: 500 })
   }
 }
+
+// Handle DELETE (delete contact by id)
+export async function DELETE(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const id = Number(searchParams.get("id"))
+  if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 })
+  try {
+    await prisma.contact.delete({ where: { id } })
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    return NextResponse.json({ error: "Delete failed" }, { status: 500 })
+  }
+}

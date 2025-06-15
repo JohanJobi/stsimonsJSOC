@@ -45,9 +45,8 @@ export default function PhotoGallery() {
               img.event?.name === selectedEvent)
         )
 
-  // Group images by section
-  const sections = Array.from(new Set(filteredImages.map(img => img.section))).sort()
-
+  // Remove section grouping if section is not a valid property
+  // Render all images in a single grid
   return (
     <>
       <AnimatedSection
@@ -90,40 +89,34 @@ export default function PhotoGallery() {
         )}
       </AnimatedSection>
 
-      {/* Only show images grouped by section to avoid duplicates */}
-      {sections.map(section => (
-        <div key={section} className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">{section}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {filteredImages
-              .filter(img => img.section === section)
-              .map(image => (
-                <div
-                  key={image.id}
-                  className="relative overflow-hidden rounded-lg cursor-pointer group"
-                  onClick={() => setSelectedImage(image)}
-                >
-                  <Image
-                    src={image.src || "/placeholder.svg"}
-                    alt={image.alt}
-                    width={400}
-                    height={300}
-                    className="object-cover w-full h-48 sm:h-64 transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="text-white text-center p-4">
-                      <div className="text-sm font-medium">
-                        {image.category.charAt(0).toUpperCase() + image.category.slice(1)}
-                        {image.category === "events" && image.event?.name ? `: ${image.event.name}` : ""}
-                      </div>
-                      <div className="text-xs opacity-80">{image.alt}</div>
-                    </div>
+      <div className="mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {filteredImages.map(image => (
+            <div
+              key={image.id}
+              className="relative overflow-hidden rounded-lg cursor-pointer group"
+              onClick={() => setSelectedImage(image)}
+            >
+              <Image
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                width={400}
+                height={300}
+                className="object-cover w-full h-48 sm:h-64 transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="text-white text-center p-4">
+                  <div className="text-sm font-medium">
+                    {image.category.charAt(0).toUpperCase() + image.category.slice(1)}
+                    {image.category === "events" && image.event?.name ? `: ${image.event.name}` : ""}
                   </div>
+                  <div className="text-xs opacity-80">{image.alt}</div>
                 </div>
-              ))}
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
 
       <Dialog open={!!selectedImage} onOpenChange={open => !open && setSelectedImage(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-transparent border-0">

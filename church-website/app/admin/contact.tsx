@@ -18,6 +18,8 @@ export default function AdminPage() {
   const [contacts, setContacts] = useState<Contact[]>([])
   const [loading, setLoading] = useState(true)
   const [copied, setCopied] = useState<{ [key: string]: boolean }>({})
+  const [deleteId, setDeleteId] = useState<number | null>(null)
+  const [showConfirm, setShowConfirm] = useState(false)
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -38,6 +40,20 @@ export default function AdminPage() {
     navigator.clipboard.writeText(value)
     setCopied(prev => ({ ...prev, [key]: true }))
     setTimeout(() => setCopied(prev => ({ ...prev, [key]: false })), 1500)
+  }
+
+  const handleDelete = (id: number) => {
+    setDeleteId(id)
+    setShowConfirm(true)
+  }
+
+  const confirmDelete = async () => {
+    if (deleteId !== null) {
+      await fetch(`/api/contact?id=${deleteId}`, { method: "DELETE" })
+      setContacts(contacts.filter(c => c.id !== deleteId))
+      setDeleteId(null)
+      setShowConfirm(false)
+    }
   }
 
   if (status === "loading") return <div>Loading...</div>
@@ -64,6 +80,7 @@ export default function AdminPage() {
                 <th className="border px-4 py-2">Phone</th>
                 <th className="border px-4 py-2">Message</th>
                 <th className="border px-4 py-2">Date, Time</th>
+                <th className="border px-4 py-2">Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -98,10 +115,33 @@ export default function AdminPage() {
                   </td>
                   <td className="border px-4 py-2">{contact.message}</td>
                   <td className="border px-4 py-2">{new Date(contact.createdAt).toLocaleString()}</td>
+                  <td className="border px-4 py-2">
+                    <button
+                      className="text-red-600 hover:text-red-800 text-xs px-2 py-1 rounded"
+                      onClick={() => handleDelete(contact.id)}
+                      title="Delete contact"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+      {showConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+            <h3 className="text-lg font-bold mb-2">Are you sure?</h3>
+            <p className="mb-4 text-sm text-gray-700">
+              Deleting this contact submission will permanently remove it. This action cannot be undone.
+            </p>
+            <div className="flex gap-4 justify-end">
+              <button className="px-4 py-2 bg-gray-200 rounded" onClick={() => { setShowConfirm(false); setDeleteId(null) }}>Cancel</button>
+              <button className="px-4 py-2 bg-red-600 text-white rounded" onClick={confirmDelete}>Delete</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

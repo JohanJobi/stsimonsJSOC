@@ -78,7 +78,25 @@ export default function AnimatedHeroLanding() {
                 <span className="block text-amber-300">Orthodox Church</span>
               </h1>
 
+              {/* Address with animation and style */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.2, delay: 1.2 }}
+                className="-mb-1"
+              >
+                <a
+                  href="https://www.google.com/maps/place/St+Oswald's+Parish+Church+Coney+Hill/@51.8524644,-2.2169742,17z/data=!3m1!4b1!4m6!3m5!1s0x487105ea0b074b45:0x4e0cbcd90a296c3a!8m2!3d51.8524611!4d-2.2143939!16s%2Fg%2F1tcx6g8f?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-amber-200 hover:text-amber-300 underline underline-offset-4 text-lg font-semibold drop-shadow-lg"
+                >
+                  St Oswald's Parish, GL1 4LX
+                </a>
+              </motion.div>
+
               {/* Subtitle */}
+              
               <motion.p
                 style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)", lineHeight: "1.4"}}
                 className="text-white/90 leading-relaxed max-w-lg"

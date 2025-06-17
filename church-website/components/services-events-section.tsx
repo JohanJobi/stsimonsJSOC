@@ -3,44 +3,27 @@
 import { motion } from "framer-motion"
 import { Clock, Calendar } from "lucide-react"
 import AnimatedSection from "@/components/animated-section"
+import { useEffect, useState } from "react"
 
 export default function ServicesEventsSection() {
-  const services = [
-    {
-      day: "Sunday",
-      time: "12:30 PM - 3:30PM",
-      service: "Holy Qurbana",
-    },
-    {
-      day: "Sunday",
-      time: "5:30 PM - 6:30PM",
-      service: "Sunday School",
-    },
-    {
-      day: "Wednesday",
-      time: "5:30 PM - 7:30PM",
-      service: "Prayer Meeting",
-    },
+  // Fetch services from API
+  const [displayedServices, setDisplayedServices] = useState<any[]>([])
+  const [displayedEvents, setDisplayedEvents] = useState<any[]>([])
 
-  ]
-
-  const events = [
-    {
-      date: "August 5, 2025",
-      title: "Drayton Manor Outing",
-      description: "A fun day out for families at Drayton Manor Park.",
-    },
-    {
-      date: "July 15, 2025",
-      title: "BBQ and Sports Day",
-      description: "Join us for a day of food, games, and fellowship at the church grounds.",
-    },
-    {
-      date: "July 6, 2025",
-      title: "Charity Fundraiser",
-      description: "Raising funds with stalls after Qurubana.",
-    },
-  ]
+  useEffect(() => {
+    fetch("/api/services")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length === 1) setDisplayedServices(data)
+        else setDisplayedServices(data.slice(0, 3))
+      })
+    fetch("/api/upcoming-events")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length === 1) setDisplayedEvents(data)
+        else setDisplayedEvents(data.slice(0, 3))
+      })
+  }, [])
 
   return (
     <section className="bg-amber-50 py-12 md:py-24">
@@ -67,7 +50,7 @@ export default function ServicesEventsSection() {
               </div>
 
               <div className="space-y-6">
-                {services.map((service, index) => (
+                {displayedServices.map((service, index) => (
                   <motion.div
                     key={index}
                     className="border-l-4 border-amber-200 pl-4"
@@ -95,16 +78,16 @@ export default function ServicesEventsSection() {
               </div>
 
               <div className="space-y-6">
-                {events.map((event, index) => (
+                {displayedEvents.map((event, index) => (
                   <motion.div
-                    key={index}
+                    key={event.id || index}
                     className="border-l-4 border-amber-200 pl-4"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                   >
-                    <p className="text-sm text-gray-500 mb-1">{event.date}</p>
-                    <h4 className="font-bold text-lg text-gray-900 mb-2">{event.title}</h4>
+                    <p className="text-sm text-gray-500 mb-1">{event.date ? new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : (event.createdAt ? new Date(event.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : "")}</p>
+                    <h4 className="font-bold text-lg text-gray-900 mb-2">{event.title || event.name}</h4>
                     <p className="text-gray-600 text-sm leading-relaxed">{event.description}</p>
                   </motion.div>
                 ))}

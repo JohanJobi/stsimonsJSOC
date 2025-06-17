@@ -30,7 +30,9 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/gallery", label: "Gallery" },
+    { href: "/events", label: "Events" }, // Restored Events link
     { href: "/contact", label: "Contact" },
+    { href: "/donate", label: "Donate" },
   ]
 
   // Show church name on all pages except home, or when scrolled on home page

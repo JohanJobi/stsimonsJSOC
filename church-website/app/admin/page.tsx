@@ -3,12 +3,12 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import ContactSubmissions from "./contact"
-import EventManager from "./event-manager"
+import { EventsPhotosManager, EventsServicesManager } from "./event-manager"
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [view, setView] = useState<"contacts" | "upload" | "events">("contacts")
+  const [view, setView] = useState<"contacts" | "upload" | "events" | "eventsServices">("contacts")
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -41,8 +41,14 @@ export default function AdminDashboard() {
         >
           Manage Events & Photos
         </button>
+        <button
+          className={`px-4 py-2 rounded ${view === "eventsServices" ? "bg-amber-700 text-white" : "bg-gray-200"}`}
+          onClick={() => setView("eventsServices")}
+        >
+          Events & Services
+        </button>
       </div>
-      {view === "contacts" ? <ContactSubmissions /> : view === "upload" ? <PhotoUploadScreen /> : <EventManager />}
+      {view === "contacts" ? <ContactSubmissions /> : view === "upload" ? <PhotoUploadScreen /> : view === "events" ? <EventsPhotosManager /> : <EventsServicesManager />}
     </div>
   )
 }
@@ -144,7 +150,7 @@ function PhotoUploadScreen() {
         <div className="flex gap-2 items-center">
           <input
             type="text"
-            placeholder="Add new event type (e.g. Christmas 2024)"
+            placeholder="(e.g. Christmas 2024)"
             value={newEventType}
             onChange={e => setNewEventType(e.target.value)}
             className="border px-2 py-1"

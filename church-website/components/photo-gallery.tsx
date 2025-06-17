@@ -120,6 +120,7 @@ export default function PhotoGallery() {
 
       <Dialog open={!!selectedImage} onOpenChange={open => !open && setSelectedImage(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-transparent border-0">
+          <DialogTitle className="text-white sr-only">Image Preview</DialogTitle>
           <button
             onClick={() => setSelectedImage(null)}
             className="absolute right-2 top-2 z-10 rounded-full bg-black/50 p-1 text-white hover:bg-black/70"
@@ -127,7 +128,6 @@ export default function PhotoGallery() {
           >
             <X className="h-5 w-5" />
           </button>
-          <DialogTitle className="text-white">Image Preview</DialogTitle>
           {selectedImage && (
             <motion.div
               className="relative"

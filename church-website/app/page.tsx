@@ -79,7 +79,22 @@ export default function Home() {
 
       {/* Services & Events Section */}
       <ServicesEventsSection />
-
+      {/* Donation Section */}
+      <section className="container py-12 md:py-20">
+        <AnimatedSection once={false} animation="fadeInUp" className="flex flex-col items-center text-center max-w-3xl mx-auto">
+          <div className="inline-block rounded-lg bg-amber-100 px-3 py-1 text-sm text-amber-800 mb-4">Support Us</div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Donate to St. Simon's Church</h2>
+          <p className="text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed max-w-2xl mb-6">
+            Your generosity helps us continue our ministry and support our community. Every contribution makes a difference.
+          </p>
+          <Link href="/donate">
+            <Button className="bg-amber-800 hover:bg-amber-900 text-lg px-8 py-3">
+              Donate Now
+              <ChevronRight className="ml-1 h-4 w-4" />
+            </Button>
+          </Link>
+        </AnimatedSection>
+      </section>
       {/* Photo Gallery Preview */}
       <section className="container py-12 md:py-24">
         <AnimatedSection once={false} animation="fadeInUp" className="flex flex-col items-center justify-center text-center mb-12">

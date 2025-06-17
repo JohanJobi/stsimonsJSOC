@@ -33,3 +33,18 @@ model Image {
   publicId  String?  // Cloudinary public ID, now optional
   createdAt DateTime @default(now())
 }
+
+model Service {
+  id      Int    @id @default(autoincrement())
+  day     String
+  time    String
+  service String
+}
+
+model UpcomingEvent {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime
+  createdAt   DateTime @default(now())
+}

@@ -26,9 +26,13 @@ export default function DonatePage() {
               </div>
               {/* By SMS */}
               <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
-                <span className="text-amber-700 text-3xl mb-2">📱</span>
-                <h2 className="text-xl font-bold mb-2">By SMS</h2>
-                <p className="text-gray-600">Text giving coming soon! Stay tuned for updates on how to donate by SMS.</p>
+                <span className="text-amber-700 text-3xl mb-2">🏦</span>
+                <h2 className="text-xl font-bold mb-2">Bank Transfer</h2>
+                <p className="text-gray-600  md:px-1">
+                  <span className="font-bold">Name:</span><br />St. Simon’s Jacobite Syrian Orthodox Church<br />
+                  <span className="font-bold">Sort Code:</span><br />40-22-09<br />
+                  <span className="font-bold">Account Number:</span> 52787733
+                </p>
               </div>
             </div>
           </AnimatedSection>

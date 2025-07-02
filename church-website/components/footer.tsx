@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="container py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-lg font-bold text-white">St. Simon&apos;s Church</h3>
             <p className="mb-4 max-w-xs">
@@ -72,7 +72,9 @@ export default function Footer() {
                 <span className="block">Phone: +44 7949864424</span>
               </p>
               <p>
-                <span className="block">Email: stsimonsjsocgloucester@gmail.com</span>
+                <span className="block">
+                  <a href="mailto:stsimonsjsocgloucester@gmail.com" className="hover:underline text-blue-400">stsimonsjsocgloucester@gmail.com</a>
+                </span>
               </p>
             </address>
           </div>

@@ -96,7 +96,7 @@ export default function Home() {
         </AnimatedSection>
       </section>
       {/* Photo Gallery Preview */}
-      <section className="container py-12 md:py-24">
+      <section className="bg-amber-50 container py-12 md:py-24">
         <AnimatedSection once={false} animation="fadeInUp" className="flex flex-col items-center justify-center text-center mb-12">
           <div className="inline-block rounded-lg bg-amber-100 px-3 py-1 text-sm text-amber-800 mb-4">Gallery</div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Church Photo Gallery</h2>

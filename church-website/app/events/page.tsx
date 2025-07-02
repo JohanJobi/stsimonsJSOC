@@ -92,9 +92,9 @@ export default function EventsPage() {
 												animate={{ opacity: 1, x: 0 }}
 												transition={{ delay: 0.5 + index * 0.05 }}
 											>
-												<p className="text-sm text-gray-500 mb-1">
-													{event.date || event.createdAt}
-												</p>
+<p className="text-sm text-gray-500 mb-1">
+	{event.date ? new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : (event.createdAt ? new Date(event.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : "")}
+</p>
 												<h4 className="font-bold text-lg text-gray-900 mb-2">
 													{event.title || event.name}
 												</h4>

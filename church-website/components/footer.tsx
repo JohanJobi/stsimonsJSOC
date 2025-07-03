@@ -56,7 +56,7 @@ export default function Footer() {
             <h3 className="mb-4 text-lg font-bold text-white">Service Times</h3>
             <ul className="space-y-2">
               <li>
-                <span className="block font-medium text-white">Sunday</span>
+                <span className="block font-medium text-white">First Sunday</span>
                 <span>12:30 PM</span>
               </li>
             </ul>

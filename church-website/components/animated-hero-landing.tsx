@@ -64,7 +64,7 @@ export default function AnimatedHeroLanding() {
           <motion.div className="w-full max-w-2xl px-8 md:px-16 lg:px-24" style={{ y: textY }}>
             {/* Main Heading */}
             <motion.div
-              className="space-y-6"
+              className="space-y-2"
               initial={{ opacity: 0, x: -60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, delay: 1.0 }}
@@ -78,12 +78,40 @@ export default function AnimatedHeroLanding() {
                 <span className="block text-amber-300">Orthodox Church</span>
               </h1>
 
+              {/* Charity Registration Number */}
+              {/* <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.2, delay: 1.1 }}
+                className="mb-1"
+              >
+                <p className="text-amber-200/80 text-sm font-medium drop-shadow-lg">
+                  Charity Registration Number: 1234567
+                </p>
+              </motion.div> */}
               {/* Address with animation and style */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2, delay: 1.2 }}
-                className="-mb-1"
+                className="mt-1"
+              >
+                <a
+                  href="https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/5254577/contact-information"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-amber-200 hover:text-amber-300 underline underline-offset-4 text-md font-semibold drop-shadow-md"
+                >
+                  Charity Number: 1212312
+                </a>
+              </motion.div>
+              
+              {/* Address with animation and style */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.2, delay: 1.2 }}
+                className="mt-1"
               >
                 <a
                   href="https://www.google.com/maps/place/St+Oswald's+Parish+Church+Coney+Hill/@51.8524644,-2.2169742,17z/data=!3m1!4b1!4m6!3m5!1s0x487105ea0b074b45:0x4e0cbcd90a296c3a!8m2!3d51.8524611!4d-2.2143939!16s%2Fg%2F1tcx6g8f?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D"

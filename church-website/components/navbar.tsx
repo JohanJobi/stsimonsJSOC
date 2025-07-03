@@ -113,7 +113,7 @@ export default function Navbar() {
           onClick={() => setIsOpen(true)}
           aria-label="Open menu"
         >
-          <Menu className={`h-6 w-6 ${isScrolled || pathname !== "/" ? "text-gray-700" : "text-white"}`} />
+          <Menu className={`h-6 w-8 ${isScrolled || pathname !== "/" ? "text-gray-700" : "text-white"}`} />
         </Button>
       </div>
 

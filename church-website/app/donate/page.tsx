@@ -22,7 +22,7 @@ export default function DonatePage() {
               <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">
                 <span className="text-amber-700 text-3xl mb-2">💻</span>
                 <h2 className="text-xl font-bold mb-2">Online</h2>
-                <p className="text-gray-600">Online giving coming soon! For now, please contact us for bank details or other online options.</p>
+                <p className="text-gray-600">Online giving coming soon! For now, please donate via bank transfer or contact us for other online options.</p>
               </div>
               {/* By SMS */}
               <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:-translate-y-2 cursor-pointer">

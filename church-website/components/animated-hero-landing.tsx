@@ -20,7 +20,7 @@ export default function AnimatedHeroLanding() {
 
   const heroImage = isMobile
     ? "/images/mobile2.jpg"
-    : "/images/church-building.jpg"
+    : "/images/church-building2.jpeg"
 
   if (!mounted) return null // or a loading skeleton
 

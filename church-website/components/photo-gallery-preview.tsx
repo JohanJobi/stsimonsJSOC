@@ -25,7 +25,7 @@ export default function PhotoGalleryPreview() {
 
   return (
     <>
-      <StaggeredChildren className="grid grid-cols-2 md:grid-cols-3 gap-4" staggerDelay={0.1} animation="zoomIn">
+      <StaggeredChildren className="bg-amber-50 grid grid-cols-2 md:grid-cols-3 gap-4" staggerDelay={0.1} animation="zoomIn">
         {randomImages.map((image, index) => (
           <div
             key={index}
